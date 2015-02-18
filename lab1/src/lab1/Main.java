@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-	//my version differs
-	//@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException {
-		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
-		String yearsToWork = in.nextLine();
+		int yearsToWork = in.nextInt();
+
 		double workingReturn; 		
 		do {
 			System.out.println("Please enter your expected working return as an integer between 0 and 20: \n"
@@ -24,9 +22,9 @@ public class Main {
 			retiredReturn = in.nextDouble();
 		} while(retiredReturn< 0 || retiredReturn > 3);
 		retiredReturn /= 100;
-		}
-		String requiredIncome = in.nextLine();
-		String monthlySSI = in.nextLine();
+		
+		int requiredIncome = in.nextInt();
+		double monthlySSI = in.nextDouble();
 	}
 
 }
