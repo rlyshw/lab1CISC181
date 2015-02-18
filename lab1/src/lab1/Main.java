@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-
+	//my version differs
 	//@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException {
 		// TODO Auto-generated method stub
-		// ho
 		Scanner in = new Scanner(System.in);
 		String yearsToWork = in.nextLine();
 		double annualReturn; 		
