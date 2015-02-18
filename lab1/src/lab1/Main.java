@@ -8,6 +8,7 @@ public class Main {
 	//@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException {
 		// TODO Auto-generated method stub
+		// ho
 		Scanner in = new Scanner(System.in);
 		String yearsToWork = in.nextLine();
 		String annualReturn = in.nextLine();
