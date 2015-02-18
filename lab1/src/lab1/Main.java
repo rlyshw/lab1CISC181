@@ -1,11 +1,11 @@
 package lab1;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]){
 
 		Scanner in = new Scanner(System.in);
 		int yearsToWork = in.nextInt();
