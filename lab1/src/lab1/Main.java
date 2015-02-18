@@ -11,7 +11,12 @@ public class Main {
 		// ho
 		Scanner in = new Scanner(System.in);
 		String yearsToWork = in.nextLine();
-		String annualReturn = in.nextLine();
+		double annualReturn; 		
+		do {
+			System.out.println("Please enter your expected annual return as an integer: ");
+			annualReturn = in.nextDouble();
+			} while(annualReturn < 0 || annualReturn > 20);
+		annualReturn = (annualReturn/100);
 		String yearsRetired = in.nextLine();
 		String requiredIncome = in.nextLine();
 		String monthlySSI = in.nextLine();
