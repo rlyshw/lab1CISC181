@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class Main {
 	static Scanner in = new Scanner(System.in);
 	//We should pull the input lines out into their own methods.
-	public static double getInput(String promptString){
+	
+	private static double getInput(String promptString){
 		//Does the input stuff here, making it easier to get input values
 		//All inputs should be doubles, since doubles cast to ints
+		// ^ True that -RW
 		System.out.print(promptString);
 		return in.nextDouble();
 	}
@@ -47,20 +49,49 @@ public class Main {
 		double monthlySSI = in.nextDouble();
 		System.out.println(monthlySSI);
 		
-		System.out.printf("The amount you need to save for retirement is $%.2f", 
-				calculatePV(retiredReturn, yearsRetired, monthlySSI, requiredIncome));
+		in.close();	// closes the scanner
 		
-		in.close();	
+		// "Present Value", AKA amount needed for retirement
+		double pv = calculatePV(retiredReturn, yearsRetired, monthlySSI, requiredIncome);
+		
+		System.out.printf("\nThe amount you need to save for retirement is $%.2f. \n"
+				+ "To get this amount, you must save $%.2f each month. ", 
+				pv, calculatePMT(pv, workingReturn, yearsToWork));
+		
+
 		
 	}
 	
+	/**
+	 * Calculates the present Value of an investment. 
+	 * In this case, it calculates the money needed for retirement 
+	 * with the given conditions.
+	 * 
+	 * @param retiredReturn
+	 * @param yearsRetired
+	 * @param monthlySSI
+	 * @param requiredIncome
+	 * @return Money needed for retirement
+	 */	
 	 private static double calculatePV (double retiredReturn, double yearsRetired, 
 				double monthlySSI, double requiredIncome) {
 			
 			double cashFlow = requiredIncome-monthlySSI;
 			
-			return cashFlow*((1-(1+ Math.pow(1+(retiredReturn/12), -(yearsRetired)*12)))/(retiredReturn/12));
-		
+			return (cashFlow)*((1-(Math.pow((1+(retiredReturn/12)),(-yearsRetired*12))))/(retiredReturn/12));			
 		}
+	 /**
+	  * Given the amount needed for retirement (pv), 
+	  * calculates the amount needed to be saved each month.
+	  * 
+	  * @param pv
+	  * @param workingReturn
+	  * @param yearsWorking
+	  * @return monthly amount needed to be saved
+	  */
+	 private static double calculatePMT(double pv, double workingReturn, double yearsWorking) {
+	
+		 return (-pv)*((workingReturn/12)/(1-(Math.pow((1+(workingReturn/12)), ((yearsWorking*12))))));
+	 }
 
 }
