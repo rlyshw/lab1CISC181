@@ -3,25 +3,28 @@ package lab1;
 import java.util.Scanner;
 
 public class Main {
+	static Scanner in = new Scanner(System.in);
+	//We should pull the input lines out into their own methods.
+	public static double getInput(String promptString){
+		//Does the input stuff here, making it easier to get input values
+		//All inputs should be doubles, since doubles cast to ints
+		System.out.print(promptString);
+		return in.nextDouble();
+	}
 
 	public static void main(String args[]){
-
-		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Please enter the number of years you will be working: \n");
-		int yearsToWork = in.nextInt();
+		double yearsToWork = getInput("Please enter the number of years you will be working: ");
 		System.out.println(yearsToWork);
 		
-		System.out.println("Please enter your expected number of years in retirement: \n");
-		int yearsRetired = in.nextInt();
+		double yearsRetired = getInput("Please enter your expected number of years in retirement: ");
 		System.out.println(yearsRetired);
 		
 		double workingReturn; 		
 		double retiredReturn;
 
 		do {
-			System.out.println("Please enter your expected working annual return as an integer between 0 and 20: \n"
-					+ "e.g. 7 ");
+			System.out.print("Please enter your expected working annual return as an integer between 0 and 20(eg. 7): ");
 			workingReturn = in.nextDouble();
 		}
 		while(workingReturn < 0 || workingReturn > 20);
@@ -29,19 +32,18 @@ public class Main {
 		System.out.println(workingReturn);
 
 		do {
-			System.out.println("Please enter your expected retired annual return as an integer between 0 and 3: \n"
-					+ "e.g. 2");
+			System.out.print("Please enter your expected retired annual return as an integer between 0 and 3(eg. 2): ");
 			retiredReturn = in.nextDouble();
 		} 
 		while(retiredReturn< 0 || retiredReturn > 3);
 		retiredReturn /= 100;
 		System.out.println(retiredReturn);
 
-		System.out.println("Please enter your required income during retirement as a dollar amount: \n");
+		System.out.print("Please enter your required income during retirement as a dollar amount: ");
 		double requiredIncome = in.nextDouble();
 		System.out.println(requiredIncome);
 		
-		System.out.println("Please enter your monthly Social Security income during retirement as a dollar amount: \n");
+		System.out.print("Please enter your monthly Social Security income during retirement as a dollar amount: ");
 		double monthlySSI = in.nextDouble();
 		System.out.println(monthlySSI);
 		
@@ -52,7 +54,7 @@ public class Main {
 		
 	}
 	
-	 private static double calculatePV (double retiredReturn, int yearsRetired, 
+	 private static double calculatePV (double retiredReturn, double yearsRetired, 
 				double monthlySSI, double requiredIncome) {
 			
 			double cashFlow = requiredIncome-monthlySSI;
