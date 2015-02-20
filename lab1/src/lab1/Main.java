@@ -5,13 +5,21 @@ import java.util.Scanner;
 public class Main {
 	static Scanner in = new Scanner(System.in);
 	//We should pull the input lines out into their own methods.
-	
 	private static double getInput(String promptString){
 		//Does the input stuff here, making it easier to get input values
 		//All inputs should be doubles, since doubles cast to ints
-		// ^ True that -RW
+		// ^ True that -RW\
 		System.out.print(promptString);
-		return in.nextDouble();
+		
+		//This try catch ensures the user only enters a double.
+		try{
+			return in.nextDouble();
+		}
+		catch(Exception e){
+			System.err.print("\nException raised: "+e+"\n");
+			in.next(); //for whatever reason the scanner has to advance past the preceding sys.out line
+			return getInput(promptString);
+		}
 	}
 
 	public static void main(String args[]){
@@ -26,27 +34,23 @@ public class Main {
 		double retiredReturn;
 
 		do {
-			System.out.print("Please enter your expected working annual return as an integer between 0 and 20(eg. 7): ");
-			workingReturn = in.nextDouble();
+			workingReturn = getInput("Please enter your expected working annual return as an integer between 0 and 20(eg. 7): ");
 		}
 		while(workingReturn < 0 || workingReturn > 20);
 		workingReturn /= 100;
 		System.out.println(workingReturn);
 
 		do {
-			System.out.print("Please enter your expected retired annual return as an integer between 0 and 3(eg. 2): ");
-			retiredReturn = in.nextDouble();
+			retiredReturn = getInput("Please enter your expected retired annual return as an integer between 0 and 3(eg. 2): ");
 		} 
 		while(retiredReturn< 0 || retiredReturn > 3);
 		retiredReturn /= 100;
 		System.out.println(retiredReturn);
 
-		System.out.print("Please enter your required income during retirement as a dollar amount: ");
-		double requiredIncome = in.nextDouble();
+		double requiredIncome = getInput("Please enter your required income during retirement as a dollar amount: ");
 		System.out.println(requiredIncome);
-		
-		System.out.print("Please enter your monthly Social Security income during retirement as a dollar amount: ");
-		double monthlySSI = in.nextDouble();
+
+		double monthlySSI = getInput("Please enter your monthly Social Security income during retirement as a dollar amount: ");
 		System.out.println(monthlySSI);
 		
 		in.close();	// closes the scanner
@@ -59,7 +63,7 @@ public class Main {
 				pv, calculatePMT(pv, workingReturn, yearsToWork));
 				
 	}
-	
+	//TODO: I'm not entirely sure, but I think this javadoc string might have to go inside of the method it is describing
 	/**
 	 * Calculates the present Value of an investment. 
 	 * In this case, it calculates the money needed for retirement 
