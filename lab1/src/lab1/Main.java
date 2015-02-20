@@ -57,9 +57,7 @@ public class Main {
 		System.out.printf("\nThe amount you need to save for retirement is $%.2f. \n"
 				+ "To get this amount, you must save $%.2f each month. ", 
 				pv, calculatePMT(pv, workingReturn, yearsToWork));
-		
-
-		
+				
 	}
 	
 	/**
